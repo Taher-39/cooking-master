@@ -5,18 +5,16 @@ document.getElementById('searchBtn').addEventListener('click', function () {
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             mealResult(data);
         });
-    clearResult();    
 });
-//https://www.themealdb.com/api/json/v1/1/search.php?s=${searchResult}
 
 function mealResult(data) {
     const mealItem = document.getElementById('mealItem');
+    document.getElementById('mealItem').innerHTML = '';
+    document.getElementById('ingredientInfo').innerHTML = '';
     for (let i = 0; i < data.meals.length; i++) {
         const element = data.meals[i];
-        
         const divItem = document.createElement('div');
         divItem.className = 'allItem'
         const itms = `
@@ -30,10 +28,6 @@ function mealResult(data) {
     }
 }
 
-// function clearResult() {
-//     document.getElementById('result').value = "";
-// }
-
 // meal details
 const detailsInfo = id => {
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
@@ -44,6 +38,7 @@ const detailsInfo = id => {
 
 const mealIngredients = element => {
     const ingredientInfo = document.getElementById('ingredientInfo');
+    // ingredientInfo.innerHTML = '';
     ingredientInfo.innerHTML = `
         <img src="${element.strMealThumb}">
         <div class="meal-info">
