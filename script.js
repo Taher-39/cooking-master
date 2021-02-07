@@ -1,6 +1,10 @@
 // search recipes handler
 document.getElementById('searchBtn').addEventListener('click', function () {
     const searchResult = document.getElementById('searchMeal').value;
+    if(searchResult === ""){
+        document.getElementById('mealItem').style.display = none;
+        document.getElementById('ingredientInfo').style.display = none;
+    }
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchResult}`;
     fetch(url)
         .then(res => res.json())
@@ -38,7 +42,6 @@ const detailsInfo = id => {
 
 const mealIngredients = element => {
     const ingredientInfo = document.getElementById('ingredientInfo');
-    // ingredientInfo.innerHTML = '';
     ingredientInfo.innerHTML = `
         <img src="${element.strMealThumb}">
         <div class="meal-info">
@@ -53,4 +56,3 @@ const mealIngredients = element => {
         </div>
     `;
 }
-
