@@ -8,17 +8,15 @@ document.getElementById('searchBtn').addEventListener('click', function () {
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchResult}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => {
-            mealResult(data);
-        });
+        .then(data => mealResult(data.meals))
+        .catch(() => displayError("Wft..Recipe in not found..Try another one🙂"));
 });
 
 function mealResult(data) {
     const mealItem = document.getElementById('mealItem');
     document.getElementById('mealItem').innerHTML = '';
     document.getElementById('ingredientInfo').innerHTML = '';
-    for (let i = 0; i < data.meals.length; i++) {
-        const element = data.meals[i];
+    data.forEach(element => {
         const divItem = document.createElement('div');
         divItem.className = 'allItem'
         const itms = `
@@ -29,7 +27,7 @@ function mealResult(data) {
         `;
         divItem.innerHTML = itms;
         mealItem.appendChild(divItem)
-    }
+    });  
 }
 
 // meal details
@@ -55,4 +53,9 @@ const mealIngredients = element => {
             <p>✔ <span>${element.strMeasure6}</span> <span>${element.strIngredient6}</span></p>
         </div>
     `;
+}
+
+const displayError = error => {
+    const errorText = document.getElementById('error-msg');
+    errorText.innerText = error;
 }
