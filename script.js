@@ -16,7 +16,7 @@ function mealResult(data) {
     const mealItem = document.getElementById('mealItem');
     document.getElementById('mealItem').innerHTML = '';
     document.getElementById('ingredientInfo').innerHTML = '';
-    document.getElementById('error-msg').innerHTML = '';
+    document.getElementById('error-msg').innerText = '';
     data.forEach(element => {
         const divItem = document.createElement('div');
         divItem.className = 'allItem'
