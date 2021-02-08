@@ -9,13 +9,14 @@ document.getElementById('searchBtn').addEventListener('click', function () {
     fetch(url)
         .then(res => res.json())
         .then(data => mealResult(data.meals))
-        .catch(() => displayError("Wft..Recipe in not found..Try another one🙂"));
+        .catch(error => displayError("Wft..Recipe in not found..Try another one🙂"));
 });
 
 function mealResult(data) {
     const mealItem = document.getElementById('mealItem');
     document.getElementById('mealItem').innerHTML = '';
     document.getElementById('ingredientInfo').innerHTML = '';
+    document.getElementById('error-msg').innerHTML = '';
     data.forEach(element => {
         const divItem = document.createElement('div');
         divItem.className = 'allItem'
